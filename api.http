@@ -1,0 +1,21 @@
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "name":"sabrina",
+    "email":"sabrina@mail.com",
+    "password":"password123"
+}
+
+### 
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"sabrina@mail.com",
+    "password":"password123"
+}
+
+###
+GET http://localhost:3000/whoami
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InNhYnJpbmEiLCJlbWFpbCI6InNhYnJpbmFAbWFpbC5jb20iLCJpYXQiOjE2ODM3MjMyNDZ9.EZ7hshIpIs8_i8zqyxn0ndgSWeXPQPrSxcdCrtzlUwk
