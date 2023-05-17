@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const base = require('../controllers/baseController');
+const user = require('../controllers/user');
 
-/* GET home page. */
-router.get('/', base.index);
-router.post('/sum', base.sum);
+const middlewares = require('../utils/middlewares');
+
+
+router.get('/', (req, res) => {
+    return res.status(200).json({
+        status: true,
+        message: 'Welcome to API',
+        data: null
+    })
+})
+router.post('/auth/register', user.register);
+router.post('/auth/login', user.login);
+router.get('/auth/whoami', middlewares.auth, user.whoami);
 
 module.exports = router;
