@@ -19,15 +19,36 @@ Sentry.init({
     ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
   ],
 
-var indexRouter = require('./routes/index');
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
-var app = express();
+// const { HTTP_PORT = 3102 } = process.env;
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(morgan("dev"));
+// RequestHandler creates a separate execution context, so that all
+// transactions/spans/breadcrumbs are isolated across requests
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
+app.use(router);
 
-app.use('/', indexRouter);
+// The error handler must be before any other error middleware and after all controllers
+app.use(Sentry.Handlers.errorHandler());
+
+// 500
+app.use((err, req, res, next) => {
+  console.log(err);
+  return res.status(500).json({
+    status: false,
+    message: err.message,
+    data: null,
+  });
+});
 
 // app.listen(HTTP_PORT, () => console.log('running on port', HTTP_PORT));
 
-module.exports = app
+module.exports = app;

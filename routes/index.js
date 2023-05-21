@@ -5,8 +5,26 @@ const user = require('../controllers/user');
 
 const middlewares = require('../utils/middlewares');
 
-/* GET home page. */
-router.get('/', base.index);
-router.post('/sum', base.sum);
+
+router.get('/', (req, res) => {
+    return res.status(200).json({
+        status: true,
+        message: 'Welcome to API',
+        data: null
+    })
+})
+router.get("/error", (req, res) => {
+  const data = {
+    status: true,
+    message: "ga error lagi",
+    data: null,
+  };
+
+  return res.status(200).json(data);
+});
+
+router.post('/auth/register', user.register);
+router.post('/auth/login', user.login);
+router.get('/auth/whoami', middlewares.auth, user.whoami);
 
 module.exports = router;
