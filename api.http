@@ -1,14 +1,14 @@
-POST http://localhost:3300/auth/register
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
     "name":"sabrina",
-    "email":"sabrina1@mail.com",
+    "email":"sabrina@mail.com",
     "password":"password123"
 }
 
 ### 
-POST http://localhost:3300/auth/login
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
@@ -17,5 +17,5 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3300/auth/whoami
-Authorization: : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InNhYnJpbmEiLCJlbWFpbCI6InNhYnJpbmFAbWFpbC5jb20iLCJpYXQiOjE2ODQ0ODcyMjB9.brnInFinLFdnerzxetMGWyxR7icXwCMnoGemiDCwyOM
+GET http://localhost:3000/whoami
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InNhYnJpbmEiLCJlbWFpbCI6InNhYnJpbmFAbWFpbC5jb20iLCJpYXQiOjE2ODM3MjMyNDZ9.EZ7hshIpIs8_i8zqyxn0ndgSWeXPQPrSxcdCrtzlUwk
